@@ -17,7 +17,7 @@ def compute_cost(X, y, theta):
     theta : R(n), linear regression parameters
     """
     inner = X @ theta - y  # R(m*1)
-    square_sum = inner.transpose() @ inner  # 1*m @ m*1 = 1*1
+    square_sum = inner.T @ inner  # 1*m @ m*1 = 1*1
 
     cost = square_sum / (2 * (len(X)))
 
@@ -29,9 +29,9 @@ def batch_update_theta(X, y, theta, alpha):
     n*m @ (m*1 - (m*n @ n*1)) -> n*1
     where n = n features
     """
-    inner = X.transpose() @ (X @ theta - y)  # R(n*1)
+    inner = X.T @ (X @ theta - y)  # R(n*1)
 
-    new_theta = theta - (alpha / len(X)) * inner  # don't forget the alpha/m, this is n*1
+    new_theta = theta - (alpha / len(X)) * inner  # n*1
 
     return new_theta  # return theta vector R(1*n)
 
