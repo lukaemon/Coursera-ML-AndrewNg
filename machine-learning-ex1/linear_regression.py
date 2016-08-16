@@ -37,16 +37,17 @@ def batch_update_theta(X, y, theta, alpha):
 
 
 def batch_gradient_decent(X, y, theta, alpha, epoch):
-    """ return the parameter and cost per batch
+    """ return the parameter and cost
     epoch: how many pass to run through whole batch
     """
     cost = [compute_cost(X, y, theta)]
+    _theta = theta  # don't want to mess up with original theta
 
     for i in range(epoch):
-        theta = batch_update_theta(X, y, theta, alpha)
-        cost.append(compute_cost(X, y, theta))
+        _theta = batch_update_theta(X, y, _theta, alpha)
+        cost.append(compute_cost(X, y, _theta))
 
-    return theta, cost
+    return _theta, cost
 
 
 def normalize_feature(df):
