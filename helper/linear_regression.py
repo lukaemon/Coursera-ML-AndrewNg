@@ -1,15 +1,3 @@
-import numpy as np
-
-
-def get_X(df):
-    return df.iloc[:, :-1].as_matrix()
-
-
-def get_y(df):
-    '''assume the last column is the target'''
-    return np.array(df.iloc[:, -1])
-
-
 def compute_cost(X, y, theta):
     """
     X: R(m*n), m records, n features
@@ -48,7 +36,3 @@ def batch_gradient_decent(X, y, theta, alpha, epoch):
         cost.append(compute_cost(X, y, _theta))
 
     return _theta, cost
-
-
-def normalize_feature(df):
-    return df.apply(lambda s: (s - s.mean()) / s.std())
