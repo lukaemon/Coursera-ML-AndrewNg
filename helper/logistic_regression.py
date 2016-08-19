@@ -13,3 +13,8 @@ def cost(theta, X, y):
 def gradient(theta, X, y):
     '''just 1 batch gradient'''
     return (1 / len(X)) * X.T @ (sigmoid(X @ theta) - y)
+
+
+def predict(x, theta):
+    prob = sigmoid(x @ theta)
+    return (prob > 0.5).astype(int)
