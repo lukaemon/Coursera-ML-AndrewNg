@@ -10,6 +10,6 @@ def cost(X, y, theta):
     return np.mean(-y * np.log(sigmoid(X @ theta)) - (1 - y) * np.log(1 - sigmoid(X @ theta)))
 
 
-def gradient(X, y, theta):
+def gradient(theta, X, y):
     '''just 1 batch gradient'''
     return (1 / len(X)) * X.T @ (sigmoid(X @ theta) - y)
