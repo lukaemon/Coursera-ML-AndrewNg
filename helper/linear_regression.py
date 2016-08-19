@@ -13,7 +13,7 @@ def compute_cost(X, y, theta):
 
     cost = square_sum / (2 * (len(X)))
 
-    return cost[0, 0]  # 1*1 ndarray, get the value out
+    return cost
 
 
 def batch_update_theta(X, y, theta, alpha):
@@ -25,7 +25,7 @@ def batch_update_theta(X, y, theta, alpha):
 
     new_theta = theta - (alpha / len(X)) * inner  # n*1
 
-    return new_theta  # return theta vector R(1*n)
+    return new_theta  # return theta vector R(n)
 
 
 def batch_gradient_decent(X, y, theta, alpha, epoch):
@@ -71,7 +71,7 @@ def linear_regression(X_data, y_data, alpha, epoch, optimizer=tf.train.GradientD
             loss_data.append(loss_val[0, 0])  # because every loss_val is 1*1 ndarray
 
             if len(loss_data) > 1 and np.abs(loss_data[-1] - loss_data[-2]) < 10 ** -9:  # early break when it's converged
-                print('Converged at epoch {}'.format(i))
+                # print('Converged at epoch {}'.format(i))
                 break
 
     # clear the graph

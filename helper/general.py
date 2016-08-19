@@ -14,7 +14,7 @@ def get_X(df):
 
 def get_y(df):
     '''assume the last column is the target'''
-    return np.array(df.iloc[:, -1]).reshape(len(df), 1)  # explicit shape for tensorflow
+    return np.array(df.iloc[:, -1])
 
 
 def normalize_feature(df):
