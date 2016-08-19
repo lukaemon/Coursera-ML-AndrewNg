@@ -5,7 +5,7 @@ def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
 
-def cost(X, y, theta):
+def cost(theta, X, y):
     ''' cost fn is -l(theta) for you to minimize'''
     return np.mean(-y * np.log(sigmoid(X @ theta)) - (1 - y) * np.log(1 - sigmoid(X @ theta)))
 
