@@ -18,7 +18,7 @@ def gradient(theta, X, y):
 
 def predict(x, theta):
     prob = sigmoid(x @ theta)
-    return (prob > 0.5).astype(int)
+    return (prob >= 0.5).astype(int)
 
 
 # for i in 0..i
@@ -42,3 +42,19 @@ def feature_mapping(x, y, power, as_ndarray=False):
         return pd.DataFrame(data).as_matrix()
     else:
         return pd.DataFrame(data)
+
+
+def regularized_cost(theta, X, y, l=1):
+    '''you don't penalize theta_0'''
+    theta_j1_to_n = theta[1:]
+    regularized_term = (l / (2 * len(X))) * np.power(theta_j1_to_n, 2).sum()
+
+    return cost(theta, X, y) + regularized_term
+
+
+def regularized_gradient(theta, X, y, l=1):
+    theta_j1_to_n = theta[1:]
+    regularized_theta = (l / len(X)) * theta_j1_to_n
+    regularized_term = np.concatenate([np.array([0]), regularized_theta])
+
+    return gradient(theta, X, y) + regularized_term
