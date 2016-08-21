@@ -61,8 +61,8 @@ def regularized_gradient(theta, X, y, l=1):
     return gradient(theta, X, y) + regularized_term
 
 
-def accuracy(x1, x2, y, power, l):
-    """ return accuracy for logistic regression of (power, l) combination
+def logistic_regression(x1, x2, y, power, l):
+    """
     x1, x2: ndarray
         feature vectors
     y: ndarray
@@ -84,4 +84,5 @@ def accuracy(x1, x2, y, power, l):
     y_pred = predict(X, final_theta)
     accuracy = np.mean(y_pred == y)
 
-    return accuracy
+    return {'accuracy': accuracy,
+            'theta': final_theta}
