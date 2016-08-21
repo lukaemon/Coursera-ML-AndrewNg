@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import scipy.optimize as opt
 
 
 def sigmoid(z):
@@ -58,3 +59,29 @@ def regularized_gradient(theta, X, y, l=1):
     regularized_term = np.concatenate([np.array([0]), regularized_theta])
 
     return gradient(theta, X, y) + regularized_term
+
+
+def accuracy(x1, x2, y, power, l):
+    """ return accuracy for logistic regression of (power, l) combination
+    x1, x2: ndarray
+        feature vectors
+    y: ndarray
+        target vector
+    power: int
+        raise x1, x2 to polynomial power
+    l: int
+        lambda constant for regularization term
+    """
+    X = feature_mapping(x1, x2, power, as_ndarray=True)
+    theta = np.zeros(X.shape[1])
+
+    res = opt.minimize(fun=regularized_cost,
+                       x0=theta,
+                       args=(X, y, l),
+                       method='Newton-CG',
+                       jac=regularized_gradient)
+    final_theta = res.x
+    y_pred = predict(X, final_theta)
+    accuracy = np.mean(y_pred == y)
+
+    return accuracy
