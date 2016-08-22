@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from helper import general as general
+sns.set(context="notebook", style="ticks", font_scale=1.5)
 
 
 def sigmoid(z):
