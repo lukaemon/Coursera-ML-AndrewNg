@@ -59,15 +59,18 @@ def regularized_cost(theta, X, y, l=1):
 
 
 def regularized_gradient(theta, X, y, l=1):
+    '''still, leave theta_0 alone'''
     theta_j1_to_n = theta[1:]
     regularized_theta = (l / len(X)) * theta_j1_to_n
+
+    # by doing this, no offset is on theta_0
     regularized_term = np.concatenate([np.array([0]), regularized_theta])
 
     return gradient(theta, X, y) + regularized_term
 
 
-def logistic_regression(power, l):
-    """
+def feature_mapped_logistic_regression(power, l):
+    """for drawing purpose only.. not a well generealize logistic regression
     power: int
         raise x1, x2 to polynomial power
     l: int
@@ -87,11 +90,8 @@ def logistic_regression(power, l):
                        method='Newton-CG',
                        jac=regularized_gradient)
     final_theta = res.x
-    y_pred = predict(X, final_theta)
-    accuracy = np.mean(y_pred == y)
 
-    return {'accuracy': accuracy,
-            'theta': final_theta}
+    return final_theta
 
 
 def find_decision_boundary(density, power, theta, threshhold):
@@ -117,7 +117,7 @@ def draw_boundary(power, l):
     density = 1000
     threshhold = 2 * 10**-3
 
-    final_theta = logistic_regression(power, l)['theta']
+    final_theta = feature_mapped_logistic_regression(power, l)
     x, y = find_decision_boundary(density, power, final_theta, threshhold)
 
     df = pd.read_csv('ex2data2.txt', names=['test1', 'test2', 'accepted'])
