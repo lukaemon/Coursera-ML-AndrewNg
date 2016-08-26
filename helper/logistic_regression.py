@@ -87,7 +87,7 @@ def feature_mapped_logistic_regression(power, l):
     res = opt.minimize(fun=regularized_cost,
                        x0=theta,
                        args=(X, y, l),
-                       method='Newton-CG',
+                       method='TNC',
                        jac=regularized_gradient)
     final_theta = res.x
 
@@ -143,7 +143,7 @@ def logistic_regression(X, y, l=1):
     res = opt.minimize(fun=regularized_cost,
                        x0=theta,
                        args=(X, y, l),
-                       method='Newton-CG',
+                       method='TNC',
                        jac=regularized_gradient,
                        options={'disp': True})
     # get trained parameters
