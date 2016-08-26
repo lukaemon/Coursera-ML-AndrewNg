@@ -125,3 +125,28 @@ def draw_boundary(power, l):
 
     plt.scatter(x, y, c='R', s=10)
     plt.title('Decision boundary')
+
+
+def logistic_regression(X, y, l=1):
+    """generalized logistic regression
+    args:
+        X: feature matrix, (m, n+1) # with incercept x0=1
+        y: target vector, (m, )
+        l: lambda constant for regularization
+
+    return: trained parameters
+    """
+    # init theta
+    theta = np.zeros(X.shape[1])
+
+    # train it
+    res = opt.minimize(fun=regularized_cost,
+                       x0=theta,
+                       args=(X, y, l),
+                       method='Newton-CG',
+                       jac=regularized_gradient,
+                       options={'disp': True})
+    # get trained parameters
+    final_theta = res.x
+
+    return final_theta
