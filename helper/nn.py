@@ -4,20 +4,26 @@ import numpy as np
 import scipy.io as sio
 
 
-def load_data():
+def load_data(transpose=True):
     data = sio.loadmat('ex3data1.mat')
     y = data.get('y')  # (5000,1)
     y = y.reshape(y.shape[0])  # make it back to column vector
 
     X = data.get('X')  # (5000,400)
 
-    # for this dataset, you need a transpose to get the orientation right
-    X = np.array([im.reshape((20, 20)).T for im in X])
+    if transpose:
+        # for this dataset, you need a transpose to get the orientation right
+        X = np.array([im.reshape((20, 20)).T for im in X])
 
-    # and I flat the image again to preserve the vector presentation
-    X = np.array([im.reshape(400) for im in X])
+        # and I flat the image again to preserve the vector presentation
+        X = np.array([im.reshape(400) for im in X])
 
     return X, y
+
+
+def load_weight():
+    data = sio.loadmat('ex3weights.mat')
+    return data['Theta1'], data['Theta2']
 
 
 def plot_an_image(image):
