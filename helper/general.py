@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib
+
 
 def get_X(df):
     """
@@ -20,15 +19,3 @@ def get_y(df):
 
 def normalize_feature(df):
     return df.apply(lambda s: (s - s.mean()) / s.std())
-
-
-def plot_an_image(a_raw_im):
-    """
-    a_raw_im : (400, )
-    """
-    im = a_raw_im.reshape((20, 20))
-
-    fig, ax = plt.subplots()
-    ax.matshow(im, cmap=matplotlib.cm.binary)
-    plt.xticks(np.array([]))  # just get rid of ticks
-    plt.yticks(np.array([]))
