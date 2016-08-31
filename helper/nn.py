@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 import scipy.io as sio
+import helper.logistic_regression as lr
 
 
 def load_data(path, transpose=True):
@@ -52,3 +53,29 @@ def plot_100_image(X):
                                    cmap=matplotlib.cm.binary)
             plt.xticks(np.array([]))
             plt.yticks(np.array([]))
+
+
+def expand_y(y):
+    """expand 5000*1 into 5000*10
+    where y=10 -> [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    """
+    res = []
+    for i in y:
+        y_array = np.zeros(10)
+        y_array[i - 1] = 1
+
+        res.append(y_array)
+
+    return np.array(res)
+
+
+def feed_forward(X, t1, t2):
+    """apply to architecture 400+1 * 25+1 *10"""
+    a2 = lr.sigmoid(X @ t1.T)  # 5000*25
+    a2 = np.insert(a2, 0, np.ones(a2.shape[0]), axis=1)
+
+    a3 = lr.sigmoid(a2 @ t2.T)  # 5000*10, all number are still prob in [0, 1]
+
+    y_pred = np.argmax(a3, axis=1) + 1  # 5000*1, comply with 1 index of matlab
+
+    return expand_y(y_pred)
