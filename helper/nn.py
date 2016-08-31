@@ -57,7 +57,7 @@ def plot_100_image(X):
 
 def expand_y(y):
     """expand 5000*1 into 5000*10
-    where y=10 -> [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    where y=10 -> [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]: ndarray
     """
     res = []
     for i in y:
@@ -69,13 +69,25 @@ def expand_y(y):
     return np.array(res)
 
 
-def feed_forward(X, t1, t2):
+def feed_forward(t1, t2, X):
     """apply to architecture 400+1 * 25+1 *10"""
     a2 = lr.sigmoid(X @ t1.T)  # 5000*25
     a2 = np.insert(a2, 0, np.ones(a2.shape[0]), axis=1)
 
-    a3 = lr.sigmoid(a2 @ t2.T)  # 5000*10, all number are still prob in [0, 1]
+    a3 = lr.sigmoid(a2 @ t2.T)  # 5000*10, this is h_theta(X)
 
-    y_pred = np.argmax(a3, axis=1) + 1  # 5000*1, comply with 1 index of matlab
+    return a3
 
-    return expand_y(y_pred)
+
+def cost(t1, t2, X, y):
+    """calculate cost
+    y: (m, k) ndarray
+    """
+    m = X.shape[0]  # get the data size m
+
+    h = feed_forward(t1, t2, X)
+
+    # np.multiply is pairwise operation
+    pair_computation = -np.multiply(y, np.log(h)) - np.multiply((1 - y), np.log(1 - h))
+
+    return pair_computation.sum() / m
