@@ -70,13 +70,21 @@ def expand_y(y):
 
 
 def feed_forward(t1, t2, X):
-    """apply to architecture 400+1 * 25+1 *10"""
-    a2 = lr.sigmoid(X @ t1.T)  # 5000*25
-    a2 = np.insert(a2, 0, np.ones(a2.shape[0]), axis=1)
+    """apply to architecture 400+1 * 25+1 *10
+    X: 5000 * 401
+    t1: 25 * 401
+    t2: 10 * 26
+    """
+    m = X.shape[0]
+    a1 = X  # 5000 * 401
 
-    a3 = lr.sigmoid(a2 @ t2.T)  # 5000*10, this is h_theta(X)
+    z2 = a1 @ t1.T  # 5000 * 25
+    a2 = np.insert(lr.sigmoid(z2), 0, np.ones(m), axis=1)  # 5000*26
 
-    return a3
+    z3 = a2 @ t2.T  # 5000 * 10
+    h = lr.sigmoid(z3)  # 5000*10, this is h_theta(X)
+
+    return a1, z2, a2, z3, h  # you need all those for backprop
 
 
 def cost(t1, t2, X, y):
@@ -85,7 +93,7 @@ def cost(t1, t2, X, y):
     """
     m = X.shape[0]  # get the data size m
 
-    h = feed_forward(t1, t2, X)
+    _, _, _, _, h = feed_forward(t1, t2, X)
 
     # np.multiply is pairwise operation
     pair_computation = -np.multiply(y, np.log(h)) - np.multiply((1 - y), np.log(1 - h))
@@ -101,3 +109,10 @@ def regularized_cost(t1, t2, X, y, l=1):
     reg_t2 = (l / (2 * m)) * np.power(t2[:, 1:], 2).sum()
 
     return cost(t1, t2, X, y) + reg_t1 + reg_t2
+
+
+def sigmoid_gradient(z):
+    """
+    pairwise op is key for this to work on vector and matrix
+    """
+    return np.multiply(lr.sigmoid(z), 1 - lr.sigmoid(z))
