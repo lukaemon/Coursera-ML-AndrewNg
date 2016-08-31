@@ -91,3 +91,13 @@ def cost(t1, t2, X, y):
     pair_computation = -np.multiply(y, np.log(h)) - np.multiply((1 - y), np.log(1 - h))
 
     return pair_computation.sum() / m
+
+
+def regularized_cost(t1, t2, X, y, l=1):
+    """the first column of t1 and t2 is intercept theta, ignore them when you do regularization"""
+    m = X.shape[0]
+
+    reg_t1 = (l / (2 * m)) * np.power(t1[:, 1:], 2).sum()  # this is how you ignore first col
+    reg_t2 = (l / (2 * m)) * np.power(t2[:, 1:], 2).sum()
+
+    return cost(t1, t2, X, y) + reg_t1 + reg_t2
