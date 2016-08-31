@@ -4,8 +4,8 @@ import numpy as np
 import scipy.io as sio
 
 
-def load_data(transpose=True):
-    data = sio.loadmat('ex3data1.mat')
+def load_data(path, transpose=True):
+    data = sio.loadmat(path)
     y = data.get('y')  # (5000,1)
     y = y.reshape(y.shape[0])  # make it back to column vector
 
@@ -21,8 +21,8 @@ def load_data(transpose=True):
     return X, y
 
 
-def load_weight():
-    data = sio.loadmat('ex3weights.mat')
+def load_weight(path):
+    data = sio.loadmat(path)
     return data['Theta1'], data['Theta2']
 
 
