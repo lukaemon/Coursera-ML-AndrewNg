@@ -83,6 +83,18 @@ def deserialize(seq):
     return seq[:25 * 401].reshape(25, 401), seq[25 * 401:].reshape(10, 26)
 
 
+def expand_array(arr):
+    """replicate array into matrix
+    [1, 2, 3]
+
+    [[1, 2, 3],
+     [1, 2, 3],
+     [1, 2, 3]]
+    """
+    # turn matrix back to ndarray
+    return np.array(np.matrix(np.ones(arr.shape[0])).T @ np.matrix(arr))
+
+
 # nn functions starts here ---------------------------
 def feed_forward(theta, X):
     """apply to architecture 400+1 * 25+1 *10
@@ -167,6 +179,20 @@ def gradient(theta, X, y):
     return serialize(delta1, delta2)
 
 
-def gradient_checking(theta, candidate_gradient):
-    pass
-    # epsilon = 0.001
+def gradient_checking(theta, X, y, epsilon):
+    def a_numeric_grad(plus, minus):
+        """calculate a partial gradient with respect to 1 theta"""
+        return (cost(plus, X, y) - cost(minus, X, y)) / (epsilon * 2)
+
+    theta_matrix = expand_array(theta)
+    epsilon_matrix = np.identity(len(theta)) * epsilon
+
+    plus_matrix = theta_matrix + epsilon_matrix
+    minus_matrix = theta_matrix - epsilon_matrix
+
+    # calculate numerical gradient with respect to all theta
+    numeric_grad = np.array([a_numeric_grad(plus_matrix[i], minus_matrix[i]) for i in range(len(theta))])
+    analytic_grad = gradient(theta, X, y)
+
+    # if the difference is not so big, pass the test
+    return np.abs(numeric_grad - analytic_grad).sum() < 0.0001

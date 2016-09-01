@@ -17,3 +17,11 @@ def test_serial_deserial():
 
     assert np.all(o1 == t1)
     assert np.all(o2 == t2)
+
+
+def test_expand_array():
+    arr = np.arange(np.random.randint(2, 10))
+    mat = nn.expand_array(arr)
+
+    for vec in mat:
+        assert np.all(vec == arr)
