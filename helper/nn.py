@@ -148,3 +148,16 @@ def gradient(t1, t2, X, y):
     delta2 = delta2 / m
 
     return delta1, delta2
+
+
+def serialize(a, b):
+    """serialize 2 matrix
+    in this nn architecture, we have theta1(25, 401), theta2(10, 26), and it's
+    gradient delta1, delta2
+    """
+    return np.concatenate((np.ravel(a), np.ravel(b)))
+
+
+def deserialize(seq):
+    """into ndarray of (25, 401), (10, 26)"""
+    return seq[:25 * 401].reshape(25, 401), seq[25 * 401:].reshape(10, 26)
