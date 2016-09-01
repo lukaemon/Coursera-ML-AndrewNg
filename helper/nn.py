@@ -5,6 +5,7 @@ import scipy.io as sio
 import helper.logistic_regression as lr
 
 
+# supportive functions starts here ---------------------------
 def load_data(path, transpose=True):
     data = sio.loadmat(path)
     y = data.get('y')  # (5000,1)
@@ -69,12 +70,26 @@ def expand_y(y):
     return np.array(res)
 
 
-def feed_forward(t1, t2, X):
+def serialize(a, b):
+    """serialize 2 matrix
+    in this nn architecture, we have theta1(25, 401), theta2(10, 26), and it's
+    gradient delta1, delta2
+    """
+    return np.concatenate((np.ravel(a), np.ravel(b)))
+
+
+def deserialize(seq):
+    """into ndarray of (25, 401), (10, 26)"""
+    return seq[:25 * 401].reshape(25, 401), seq[25 * 401:].reshape(10, 26)
+
+
+# nn functions starts here ---------------------------
+def feed_forward(theta, X):
     """apply to architecture 400+1 * 25+1 *10
     X: 5000 * 401
-    t1: 25 * 401
-    t2: 10 * 26
     """
+
+    t1, t2 = deserialize(theta)  # t1: (25,401) t2: (10,26)
     m = X.shape[0]
     a1 = X  # 5000 * 401
 
@@ -87,13 +102,13 @@ def feed_forward(t1, t2, X):
     return a1, z2, a2, z3, h  # you need all those for backprop
 
 
-def cost(t1, t2, X, y):
+def cost(theta, X, y):
     """calculate cost
     y: (m, k) ndarray
     """
     m = X.shape[0]  # get the data size m
 
-    _, _, _, _, h = feed_forward(t1, t2, X)
+    _, _, _, _, h = feed_forward(theta, X)
 
     # np.multiply is pairwise operation
     pair_computation = -np.multiply(y, np.log(h)) - np.multiply((1 - y), np.log(1 - h))
@@ -101,14 +116,15 @@ def cost(t1, t2, X, y):
     return pair_computation.sum() / m
 
 
-def regularized_cost(t1, t2, X, y, l=1):
+def regularized_cost(theta, X, y, l=1):
     """the first column of t1 and t2 is intercept theta, ignore them when you do regularization"""
+    t1, t2 = deserialize(theta)  # t1: (25,401) t2: (10,26)
     m = X.shape[0]
 
     reg_t1 = (l / (2 * m)) * np.power(t1[:, 1:], 2).sum()  # this is how you ignore first col
     reg_t2 = (l / (2 * m)) * np.power(t2[:, 1:], 2).sum()
 
-    return cost(t1, t2, X, y) + reg_t1 + reg_t2
+    return cost(theta, X, y) + reg_t1 + reg_t2
 
 
 def sigmoid_gradient(z):
@@ -118,14 +134,15 @@ def sigmoid_gradient(z):
     return np.multiply(lr.sigmoid(z), 1 - lr.sigmoid(z))
 
 
-def gradient(t1, t2, X, y):
+def gradient(theta, X, y):
     # initialize
+    t1, t2 = deserialize(theta)  # t1: (25,401) t2: (10,26)
     m = X.shape[0]
 
     delta1 = np.zeros(t1.shape)  # (25, 401)
     delta2 = np.zeros(t2.shape)  # (10, 26)
 
-    a1, z2, a2, z3, h = feed_forward(t1, t2, X)
+    a1, z2, a2, z3, h = feed_forward(theta, X)
 
     for i in range(m):
         a1i = a1[i, :]  # (1, 401)
@@ -147,17 +164,9 @@ def gradient(t1, t2, X, y):
     delta1 = delta1 / m
     delta2 = delta2 / m
 
-    return delta1, delta2
+    return serialize(delta1, delta2)
 
 
-def serialize(a, b):
-    """serialize 2 matrix
-    in this nn architecture, we have theta1(25, 401), theta2(10, 26), and it's
-    gradient delta1, delta2
-    """
-    return np.concatenate((np.ravel(a), np.ravel(b)))
-
-
-def deserialize(seq):
-    """into ndarray of (25, 401), (10, 26)"""
-    return seq[:25 * 401].reshape(25, 401), seq[25 * 401:].reshape(10, 26)
+def gradient_checking(theta, candidate_gradient):
+    pass
+    # epsilon = 0.001
