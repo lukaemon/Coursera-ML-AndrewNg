@@ -6,7 +6,7 @@ import helper.logistic_regression as lr
 import scipy.optimize as opt
 
 
-# supportive functions starts here ---------------------------
+# supportive function starts here ---------------------------
 def load_data(path, transpose=True):
     data = sio.loadmat(path)
     y = data.get('y')  # (5000,1)
@@ -31,7 +31,7 @@ def load_weight(path):
 
 def plot_an_image(image):
     """
-    image : (20, 20)
+    image : (400,)
     """
     fig, ax = plt.subplots(figsize=(1, 1))
     ax.matshow(image.reshape((20, 20)), cmap=matplotlib.cm.binary)
@@ -41,7 +41,7 @@ def plot_an_image(image):
 
 def plot_100_image(X):
     """ sample 100 image and show them
-    X : (5000, 20, 20)
+    X : (5000, 400)
     """
     # sample 100 image, reshape, reorg it
     sample_idx = np.random.choice(np.arange(X.shape[0]), 100)  # 100*400
@@ -98,7 +98,7 @@ def expand_array(arr):
 
 def sigmoid_gradient(z):
     """
-    pairwise op is key for this to work on vector and matrix
+    pairwise op is key for this to work on both vector and matrix
     """
     return np.multiply(lr.sigmoid(z), 1 - lr.sigmoid(z))
 
@@ -136,7 +136,33 @@ def gradient_checking(theta, X, y, epsilon, regularized=False):
     print('If your backpropagation implementation is correct,\nthe relative difference will be smaller than 10e-9 (assume epsilon=0.0001).\nRelative Difference: {}\n'.format(diff))
 
 
+def show_accuracy(theta, X, y):
+    _, _, _, _, h = feed_forward(theta, X)
+
+    y_pred = np.argmax(h, axis=1) + 1
+
+    return np.mean(y == y_pred)
+
+
+def plot_hidden_layer(theta):
+    """
+    theta: (10285, )
+    """
+    final_theta1, _ = deserialize(theta)
+    hidden_layer = final_theta1[:, 1:]  # ger rid of bias term theta
+
+    fig, ax_array = plt.subplots(nrows=5, ncols=5, sharey=True, sharex=True, figsize=(5, 5))
+
+    for r in range(5):
+        for c in range(5):
+            ax_array[r, c].matshow(hidden_layer[5 * r + c].reshape((20, 20)),
+                                   cmap=matplotlib.cm.binary)
+            plt.xticks(np.array([]))
+            plt.yticks(np.array([]))
+
+
 # nn functions starts here ---------------------------
+# ps. all the y here is expanded version (5000,10)
 def feed_forward(theta, X):
     """apply to architecture 400+1 * 25+1 *10
     X: 5000 * 401
@@ -231,6 +257,9 @@ def regularized_gradient(theta, X, y, l=1):
 
 
 def nn_training(X, y):
+    """regularized version
+    the architecture is hard coded here... won't generalize
+    """
     init_theta = random_init(10285)  # 25*401 + 10*26
 
     res = opt.minimize(fun=regularized_cost,
@@ -240,11 +269,3 @@ def nn_training(X, y):
                        jac=regularized_gradient,
                        options={'maxiter': 400})
     return res
-
-
-def show_accuracy(theta, X, y):
-    _, _, _, _, h = feed_forward(theta, X)
-
-    y_pred = np.argmax(h, axis=1) + 1
-
-    return np.mean(y == y_pred)
