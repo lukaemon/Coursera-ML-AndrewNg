@@ -3,6 +3,7 @@ import matplotlib
 import numpy as np
 import scipy.io as sio
 import helper.logistic_regression as lr
+import scipy.optimize as opt
 
 
 # supportive functions starts here ---------------------------
@@ -95,6 +96,46 @@ def expand_array(arr):
     return np.array(np.matrix(np.ones(arr.shape[0])).T @ np.matrix(arr))
 
 
+def sigmoid_gradient(z):
+    """
+    pairwise op is key for this to work on vector and matrix
+    """
+    return np.multiply(lr.sigmoid(z), 1 - lr.sigmoid(z))
+
+
+def random_init(size):
+    return np.random.uniform(-0.12, 0.12, size)
+
+
+def gradient_checking(theta, X, y, epsilon, regularized=False):
+    def a_numeric_grad(plus, minus, regularized=False):
+        """calculate a partial gradient with respect to 1 theta"""
+        if regularized:
+            return (regularized_cost(plus, X, y) - regularized_cost(minus, X, y)) / (epsilon * 2)
+        else:
+            return (cost(plus, X, y) - cost(minus, X, y)) / (epsilon * 2)
+
+    theta_matrix = expand_array(theta)  # expand to (10285, 10285)
+    epsilon_matrix = np.identity(len(theta)) * epsilon
+
+    plus_matrix = theta_matrix + epsilon_matrix
+    minus_matrix = theta_matrix - epsilon_matrix
+
+    # calculate numerical gradient with respect to all theta
+    numeric_grad = np.array([a_numeric_grad(plus_matrix[i], minus_matrix[i], regularized)
+                                    for i in range(len(theta))])
+
+    # analytical grad will depend on if you want it to be regularized or not
+    analytic_grad = regularized_gradient(theta, X, y) if regularized else gradient(theta, X, y)
+
+    # If you have a correct implementation, and assuming you used EPSILON = 0.0001
+    # the diff below should be less than 1e-9
+    # this is how original matlab code do gradient checking
+    diff = np.linalg.norm(numeric_grad - analytic_grad) / np.linalg.norm(numeric_grad + analytic_grad)
+
+    print('If your backpropagation implementation is correct,\nthe relative difference will be smaller than 10e-9 (assume epsilon=0.0001).\nRelative Difference: {}\n'.format(diff))
+
+
 # nn functions starts here ---------------------------
 def feed_forward(theta, X):
     """apply to architecture 400+1 * 25+1 *10
@@ -139,13 +180,6 @@ def regularized_cost(theta, X, y, l=1):
     return cost(theta, X, y) + reg_t1 + reg_t2
 
 
-def sigmoid_gradient(z):
-    """
-    pairwise op is key for this to work on vector and matrix
-    """
-    return np.multiply(lr.sigmoid(z), 1 - lr.sigmoid(z))
-
-
 def gradient(theta, X, y):
     # initialize
     t1, t2 = deserialize(theta)  # t1: (25,401) t2: (10,26)
@@ -179,35 +213,6 @@ def gradient(theta, X, y):
     return serialize(delta1, delta2)
 
 
-def gradient_checking(theta, X, y, epsilon, regularized=False):
-    def a_numeric_grad(plus, minus, regularized=False):
-        """calculate a partial gradient with respect to 1 theta"""
-        if regularized:
-            return (regularized_cost(plus, X, y) - regularized_cost(minus, X, y)) / (epsilon * 2)
-        else:
-            return (cost(plus, X, y) - cost(minus, X, y)) / (epsilon * 2)
-
-    theta_matrix = expand_array(theta)  # expand to (10285, 10285)
-    epsilon_matrix = np.identity(len(theta)) * epsilon
-
-    plus_matrix = theta_matrix + epsilon_matrix
-    minus_matrix = theta_matrix - epsilon_matrix
-
-    # calculate numerical gradient with respect to all theta
-    numeric_grad = np.array([a_numeric_grad(plus_matrix[i], minus_matrix[i], regularized)
-                                    for i in range(len(theta))])
-
-    # analytical grad will depend on if you want it to be regularized or not
-    analytic_grad = regularized_gradient(theta, X, y) if regularized else gradient(theta, X, y)
-
-    # If you have a correct implementation, and assuming you used EPSILON = 0.0001
-    # the diff below should be less than 1e-9
-    # this is how original matlab code do gradient checking
-    diff = np.linalg.norm(numeric_grad - analytic_grad) / np.linalg.norm(numeric_grad + analytic_grad)
-
-    print('If your backpropagation implementation is correct,\nthe relative difference will be smaller than 10e-9 (assume epsilon=0.0001).\nRelative Difference: {}\n'.format(diff))
-
-
 def regularized_gradient(theta, X, y, l=1):
     """don't regularize theta of bias terms"""
     m = X.shape[0]
@@ -223,3 +228,23 @@ def regularized_gradient(theta, X, y, l=1):
     delta2 = delta2 + reg_term_d2
 
     return serialize(delta1, delta2)
+
+
+def nn_training(X, y):
+    init_theta = random_init(10285)  # 25*401 + 10*26
+
+    res = opt.minimize(fun=regularized_cost,
+                       x0=init_theta,
+                       args=(X, y, 1),
+                       method='TNC',
+                       jac=regularized_gradient,
+                       options={'maxiter': 400})
+    return res
+
+
+def show_accuracy(theta, X, y):
+    _, _, _, _, h = feed_forward(theta, X)
+
+    y_pred = np.argmax(h, axis=1) + 1
+
+    return np.mean(y == y_pred)
