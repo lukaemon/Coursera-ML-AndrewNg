@@ -179,20 +179,47 @@ def gradient(theta, X, y):
     return serialize(delta1, delta2)
 
 
-def gradient_checking(theta, X, y, epsilon):
-    def a_numeric_grad(plus, minus):
+def gradient_checking(theta, X, y, epsilon, regularized=False):
+    def a_numeric_grad(plus, minus, regularized=False):
         """calculate a partial gradient with respect to 1 theta"""
-        return (cost(plus, X, y) - cost(minus, X, y)) / (epsilon * 2)
+        if regularized:
+            return (regularized_cost(plus, X, y) - regularized_cost(minus, X, y)) / (epsilon * 2)
+        else:
+            return (cost(plus, X, y) - cost(minus, X, y)) / (epsilon * 2)
 
-    theta_matrix = expand_array(theta)
+    theta_matrix = expand_array(theta)  # expand to (10285, 10285)
     epsilon_matrix = np.identity(len(theta)) * epsilon
 
     plus_matrix = theta_matrix + epsilon_matrix
     minus_matrix = theta_matrix - epsilon_matrix
 
     # calculate numerical gradient with respect to all theta
-    numeric_grad = np.array([a_numeric_grad(plus_matrix[i], minus_matrix[i]) for i in range(len(theta))])
-    analytic_grad = gradient(theta, X, y)
+    numeric_grad = np.array([a_numeric_grad(plus_matrix[i], minus_matrix[i], regularized)
+                                    for i in range(len(theta))])
 
-    # if the difference is not so big, pass the test
-    return np.abs(numeric_grad - analytic_grad).sum() < 0.0001
+    # analytical grad will depend on if you want it to be regularized or not
+    analytic_grad = regularized_gradient(theta, X, y) if regularized else gradient(theta, X, y)
+
+    # If you have a correct implementation, and assuming you used EPSILON = 0.0001
+    # the diff below should be less than 1e-9
+    # this is how original matlab code do gradient checking
+    diff = np.linalg.norm(numeric_grad - analytic_grad) / np.linalg.norm(numeric_grad + analytic_grad)
+
+    print('If your backpropagation implementation is correct,\nthe relative difference will be smaller than 10e-9 (assume epsilon=0.0001).\nRelative Difference: {}\n'.format(diff))
+
+
+def regularized_gradient(theta, X, y, l=1):
+    """don't regularize theta of bias terms"""
+    m = X.shape[0]
+    delta1, delta2 = deserialize(gradient(theta, X, y))
+    t1, t2 = deserialize(theta)
+
+    t1[:, 0] = 0
+    reg_term_d1 = (l / m) * t1
+    delta1 = delta1 + reg_term_d1
+
+    t2[:, 0] = 0
+    reg_term_d2 = (l / m) * t2
+    delta2 = delta2 + reg_term_d2
+
+    return serialize(delta1, delta2)
