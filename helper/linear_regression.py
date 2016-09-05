@@ -1,7 +1,30 @@
 import tensorflow as tf
 import numpy as np
+import scipy.io as sio
+import pandas as pd
+import altair as alt
 
 
+# support functions ------------------------------------------------------------
+def load_data():
+    """for ex5
+    d['X'] shape = (12, 1)
+    pandas has trouble taking this 2d ndarray to construct a dataframe, so I ravel
+    the results
+    """
+    d = sio.loadmat('ex5data1.mat')
+    return map(np.ravel, [d['X'], d['y'], d['Xval'], d['yval'], d['Xtest'], d['ytest']])
+
+
+def scatter_plot(x, y):
+    df = pd.DataFrame({'X': x, 'y': y})
+    c = alt.Chart(df).mark_circle().encode(
+        x='X',
+        y='y')
+    return c
+
+
+# linear regression functions --------------------------------------------------
 def compute_cost(X, y, theta):
     """
     X: R(m*n), m records, n features
