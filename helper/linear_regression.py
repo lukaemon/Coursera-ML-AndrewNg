@@ -2,7 +2,6 @@ import tensorflow as tf
 import numpy as np
 import scipy.io as sio
 import pandas as pd
-import altair as alt
 
 
 # support functions ------------------------------------------------------------
@@ -16,53 +15,46 @@ def load_data():
     return map(np.ravel, [d['X'], d['y'], d['Xval'], d['yval'], d['Xtest'], d['ytest']])
 
 
-def scatter_plot(x, y):
-    df = pd.DataFrame({'X': x, 'y': y})
-    c = alt.Chart(df).mark_circle().encode(
-        x='X',
-        y='y')
-    return c
-
-
 # linear regression functions --------------------------------------------------
-def compute_cost(X, y, theta):
+def cost(theta, X, y):
     """
     X: R(m*n), m records, n features
     y: R(m)
     theta : R(n), linear regression parameters
     """
-    inner = X @ theta - y  # R(m*1)
-    square_sum = inner.T @ inner  # 1*m @ m*1 = 1*1
+    m = X.shape[0]
 
-    cost = square_sum / (2 * (len(X)))
+    inner = X @ theta - y  # R(m*1)
+
+    # 1*m @ m*1 = 1*1 in matrix multiplication
+    # but you know numpy didn't do transpose in 1d array, so here is just a
+    # vector inner product to itselves
+    square_sum = inner.T @ inner
+    cost = square_sum / (2 * m)
 
     return cost
 
 
-def batch_update_theta(X, y, theta, alpha):
-    """ return whole batch updated parameters
-    n*m @ (m*1 - (m*n @ n*1)) -> n*1
-    where n = n features
-    """
-    inner = X.T @ (X @ theta - y)  # R(n*1)
+def gradient(theta, X, y):
+    m = X.shape[0]
 
-    new_theta = theta - (alpha / len(X)) * inner  # n*1
+    inner = X.T @ (X @ theta - y)  # (m,n).T @ (m, 1) -> (n, 1)
 
-    return new_theta  # return theta vector R(n)
+    return inner / m
 
 
-def batch_gradient_decent(X, y, theta, alpha, epoch):
-    """ return the parameter and cost
+def batch_gradient_decent(theta, X, y, epoch, alpha=0.01):
+    """fit the linear regression, return the parameter and cost
     epoch: how many pass to run through whole batch
     """
-    cost = [compute_cost(X, y, theta)]
-    _theta = theta  # don't want to mess up with original theta
+    cost_data = [cost(theta, X, y)]
+    _theta = theta.copy()  # don't want to mess up with original theta
 
-    for i in range(epoch):
-        _theta = batch_update_theta(X, y, _theta, alpha)
-        cost.append(compute_cost(X, y, _theta))
+    for _ in range(epoch):
+        _theta = _theta - alpha * gradient(_theta, X, y)
+        cost_data.append(cost(_theta, X, y))
 
-    return _theta, cost
+    return _theta, cost_data
 
 
 def linear_regression(X_data, y_data, alpha, epoch, optimizer=tf.train.GradientDescentOptimizer):
