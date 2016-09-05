@@ -1,7 +1,6 @@
 import tensorflow as tf
 import numpy as np
 import scipy.io as sio
-import pandas as pd
 
 
 # support functions ------------------------------------------------------------
@@ -33,6 +32,14 @@ def cost(theta, X, y):
     cost = square_sum / (2 * m)
 
     return cost
+
+
+def regularized_cost(theta, X, y, l=1):
+    m = X.shape[0]
+
+    regularized_term = (l / (2 * m)) * np.power(theta[1:], 2).sum()
+
+    return cost(theta, X, y) + regularized_term
 
 
 def gradient(theta, X, y):
