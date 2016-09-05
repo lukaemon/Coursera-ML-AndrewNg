@@ -95,10 +95,7 @@ def linear_regression_np(X, y, l=1):
                        method='TNC',
                        jac=regularized_gradient,
                        options={'disp': True})
-    # get trained parameters
-    final_theta = res.x
-
-    return final_theta
+    return res
 
 
 def linear_regression(X_data, y_data, alpha, epoch, optimizer=tf.train.GradientDescentOptimizer):
