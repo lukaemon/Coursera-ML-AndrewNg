@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import scipy.io as sio
+import scipy.optimize as opt
 
 
 # support functions ------------------------------------------------------------
@@ -50,6 +51,17 @@ def gradient(theta, X, y):
     return inner / m
 
 
+def regularized_gradient(theta, X, y, l=1):
+    m = X.shape[0]
+
+    regularized_term = theta.copy()  # same shape as theta
+    regularized_term[0] = 0  # don't regularize intercept theta
+
+    regularized_term = (l / m) * regularized_term
+
+    return gradient(theta, X, y) + regularized_term
+
+
 def batch_gradient_decent(theta, X, y, epoch, alpha=0.01):
     """fit the linear regression, return the parameter and cost
     epoch: how many pass to run through whole batch
@@ -62,6 +74,31 @@ def batch_gradient_decent(theta, X, y, epoch, alpha=0.01):
         cost_data.append(cost(_theta, X, y))
 
     return _theta, cost_data
+
+
+def linear_regression_np(X, y, l=1):
+    """linear regression
+    args:
+        X: feature matrix, (m, n+1) # with incercept x0=1
+        y: target vector, (m, )
+        l: lambda constant for regularization
+
+    return: trained parameters
+    """
+    # init theta
+    theta = np.ones(X.shape[1])
+
+    # train it
+    res = opt.minimize(fun=regularized_cost,
+                       x0=theta,
+                       args=(X, y, l),
+                       method='TNC',
+                       jac=regularized_gradient,
+                       options={'disp': True})
+    # get trained parameters
+    final_theta = res.x
+
+    return final_theta
 
 
 def linear_regression(X_data, y_data, alpha, epoch, optimizer=tf.train.GradientDescentOptimizer):
