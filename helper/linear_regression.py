@@ -53,8 +53,8 @@ def plot_learning_curve(X, y, Xval, yval, l=0):
 
         # remember, when you compute the cost here, you are computing
         # non-regularized cost. Regularization is used to fit parameters only
-        tc = regularized_cost(res.x, X[:i, :], y[:i], l=0)
-        cv = regularized_cost(res.x, Xval, yval, l=0)
+        tc = cost(res.x, X[:i, :], y[:i])
+        cv = cost(res.x, Xval, yval)
 
         training_cost.append(tc)
         cv_cost.append(cv)
