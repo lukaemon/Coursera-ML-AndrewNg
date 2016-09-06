@@ -2,6 +2,9 @@ import tensorflow as tf
 import numpy as np
 import scipy.io as sio
 import scipy.optimize as opt
+import pandas as pd
+import matplotlib.pyplot as plt
+from helper import general as general
 
 
 # support functions ------------------------------------------------------------
@@ -13,6 +16,52 @@ def load_data():
     """
     d = sio.loadmat('ex5data1.mat')
     return map(np.ravel, [d['X'], d['y'], d['Xval'], d['yval'], d['Xtest'], d['ytest']])
+
+
+def poly_features(x, power, as_ndarray=False):
+    data = {'f{}'.format(i): np.power(x, i) for i in range(1, power + 1)}
+    df = pd.DataFrame(data)
+
+    return df.as_matrix() if as_ndarray else df
+
+
+def prepare_poly_data(*args, power):
+    """
+    args: keep feeding in X, Xval, or Xtest
+        will return in the same order
+    """
+    def prepare(x):
+        # expand feature
+        df = poly_features(x, power=power)
+
+        # normalization
+        ndarr = general.normalize_feature(df).as_matrix()
+
+        # add intercept term
+        return np.insert(ndarr, 0, np.ones(ndarr.shape[0]), axis=1)
+
+    return [prepare(x) for x in args]
+
+
+def plot_learning_curve(X, y, Xval, yval, l=0):
+    training_cost, cv_cost = [], []
+    m = X.shape[0]
+
+    for i in range(1, m + 1):
+        # regularization applies here for fitting parameters
+        res = linear_regression_np(X[:i, :], y[:i], l=l)
+
+        # remember, when you compute the cost here, you are computing
+        # non-regularized cost. Regularization is used to fit parameters only
+        tc = regularized_cost(res.x, X[:i, :], y[:i], l=0)
+        cv = regularized_cost(res.x, Xval, yval, l=0)
+
+        training_cost.append(tc)
+        cv_cost.append(cv)
+
+    plt.plot(np.arange(1, m + 1), training_cost, label='training cost')
+    plt.plot(np.arange(1, m + 1), cv_cost, label='cv cost')
+    plt.legend(loc=1)
 
 
 # linear regression functions --------------------------------------------------
