@@ -61,11 +61,36 @@ def new_centroids(data, C):
                        as_matrix()
 
 
-def k_means(data, k, epoch=300, n_init=10):
+def cost(data, centroids, C):
+    m = data.shape[0]
+
+    expand_C_with_centroids = np.array([centroids[i] for i in C])
+
+    distances = np.apply_along_axis(func1d=np.linalg.norm,
+                                    axis=1,
+                                    arr=data.as_matrix() - expand_C_with_centroids)
+    return distances.sum() / m
+
+
+def _k_means_iter(data, k, epoch=100):
+    """one shot k-means"""
     centroids = random_init(data, k)
 
     for i in range(epoch):
         C = assign_cluster(data, centroids)
         centroids = new_centroids(data, C)
 
-    return C
+    return C, centroids, cost(data, centroids, C)
+
+
+def k_means(data, k, epoch=100, n_init=10):
+    """do multiple random init and pick the best one to return
+    Returns:
+        (C, centroids, least_cost)
+    """
+
+    tries = np.array([_k_means_iter(data, k, epoch) for _ in range(n_init)])
+
+    least_cost_idx = np.argmin(tries[:, -1])
+
+    return tries[least_cost_idx]
