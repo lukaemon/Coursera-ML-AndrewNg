@@ -72,15 +72,23 @@ def cost(data, centroids, C):
     return distances.sum() / m
 
 
-def _k_means_iter(data, k, epoch=100):
-    """one shot k-means"""
+def _k_means_iter(data, k, epoch=100, tol=0.0001):
+    """one shot k-means
+    with early break
+    """
     centroids = random_init(data, k)
+    cost_progress = []
 
     for i in range(epoch):
         C = assign_cluster(data, centroids)
         centroids = new_centroids(data, C)
+        cost_progress.append(cost(data, centroids, C))
 
-    return C, centroids, cost(data, centroids, C)
+        if len(cost_progress) > 1:
+            if (np.abs(cost_progress[-1] - cost_progress[-2])) / cost_progress[-1] < tol:
+                break
+
+    return C, centroids, cost_progress[-1]
 
 
 def k_means(data, k, epoch=100, n_init=10):
