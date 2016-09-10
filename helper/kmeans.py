@@ -1,6 +1,6 @@
 import numpy as np
 
-# data shape
+# data shape (pd.DataFrame)
 #          X1        X2
 # 0  1.842080  4.607572
 # 1  5.658583  4.799964
@@ -64,7 +64,7 @@ def new_centroids(data, C):
 def cost(data, centroids, C):
     m = data.shape[0]
 
-    expand_C_with_centroids = np.array([centroids[i] for i in C])
+    expand_C_with_centroids = centroids[C]
 
     distances = np.apply_along_axis(func1d=np.linalg.norm,
                                     axis=1,
@@ -84,7 +84,7 @@ def _k_means_iter(data, k, epoch=100, tol=0.0001):
         centroids = new_centroids(data, C)
         cost_progress.append(cost(data, centroids, C))
 
-        if len(cost_progress) > 1:
+        if len(cost_progress) > 1:  # early break
             if (np.abs(cost_progress[-1] - cost_progress[-2])) / cost_progress[-1] < tol:
                 break
 
@@ -93,6 +93,8 @@ def _k_means_iter(data, k, epoch=100, tol=0.0001):
 
 def k_means(data, k, epoch=100, n_init=10):
     """do multiple random init and pick the best one to return
+    Args:
+        data (pd.DataFrame)
     Returns:
         (C, centroids, least_cost)
     """
