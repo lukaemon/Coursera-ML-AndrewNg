@@ -1,12 +1,30 @@
 import numpy as np
-# X (ndarray)
-# [[-0.5180535  -1.57678415]
-#  [ 0.45915361  0.83189934]
-#  [-1.13685138 -0.57729787]
-#  [-1.04345995 -1.25794647]
-#  [-0.97413176 -0.80837709]]
+import matplotlib.pyplot as plt
+import matplotlib
 
 
+# support functions ---------------------------------------
+def plot_n_image(X, n):
+    """ plot first n images
+    n has to be a square number
+    """
+    pic_size = int(np.sqrt(X.shape[1]))
+    grid_size = int(np.sqrt(n))
+
+    first_n_images = X[:n, :]
+
+    fig, ax_array = plt.subplots(nrows=grid_size, ncols=grid_size,
+                                    sharey=True, sharex=True, figsize=(8, 8))
+
+    for r in range(grid_size):
+        for c in range(grid_size):
+            ax_array[r, c].matshow(first_n_images[grid_size * r + c].reshape((pic_size, pic_size)),
+                                   cmap=matplotlib.cm.binary)
+            plt.xticks(np.array([]))
+            plt.yticks(np.array([]))
+
+
+# PCA functions ---------------------------------------
 def covariance_matrix(X):
     """
     Args:
@@ -33,6 +51,10 @@ def normalize(X):
 def pca(X):
     """
     http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.svd.html
+    Args:
+        X ndarray(m, n)
+    Returns:
+        U ndarray(n, n): principle components
     """
     # 1. normalize data
     X_norm = normalize(X)
@@ -41,7 +63,7 @@ def pca(X):
     Sigma = covariance_matrix(X_norm)
 
     # 3. do singular value decomposition
-    U, S, V = np.linalg.svd(Sigma)
+    U, S, V = np.linalg.svd(Sigma)  # U: principle components (n, n)
 
     return U, S, V
 
