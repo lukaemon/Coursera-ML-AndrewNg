@@ -80,6 +80,8 @@ def _k_means_iter(data, k, epoch=100, tol=0.0001):
     cost_progress = []
 
     for i in range(epoch):
+        print('running epoch {}'.format(i))
+
         C = assign_cluster(data, centroids)
         centroids = new_centroids(data, C)
         cost_progress.append(cost(data, centroids, C))
