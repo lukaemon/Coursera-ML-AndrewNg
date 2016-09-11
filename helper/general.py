@@ -18,4 +18,5 @@ def get_y(df):
 
 
 def normalize_feature(df):
-    return df.apply(lambda s: (s - s.mean()) / s.std())
+    """Applies function along input axis(default 0) of DataFrame."""
+    return df.apply(lambda column: (column - column.mean()) / column.std())
