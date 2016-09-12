@@ -16,6 +16,9 @@ def select_threshold(X, Xval, yval):
         e: best epsilon with the highest f-score
         f-score: such best f-score
         y_pred: the prediction of the best epsilon
+
+    I do prediciton here using Xval, CV data, which is not right, but the
+    original data set didn't provide test data. So I'll just be sloppy on this.
     """
     # create multivariate model
     mu = X.mean(axis=0)
