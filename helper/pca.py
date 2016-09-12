@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib
 
 
 # support functions ---------------------------------------
@@ -18,8 +17,7 @@ def plot_n_image(X, n):
 
     for r in range(grid_size):
         for c in range(grid_size):
-            ax_array[r, c].matshow(first_n_images[grid_size * r + c].reshape((pic_size, pic_size)),
-                                   cmap=matplotlib.cm.binary)
+            ax_array[r, c].imshow(first_n_images[grid_size * r + c].reshape((pic_size, pic_size)))
             plt.xticks(np.array([]))
             plt.yticks(np.array([]))
 
