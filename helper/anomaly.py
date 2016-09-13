@@ -1,6 +1,6 @@
 import numpy as np
 from scipy import stats
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, classification_report
 
 # X data shape
 # array([[ 13.04681517,  14.74115241],
@@ -15,12 +15,8 @@ def select_threshold(X, Xval, yval):
     Returns:
         e: best epsilon with the highest f-score
         f-score: such best f-score
-        y_pred: the prediction of the best epsilon
-
-    I do prediciton here using Xval, CV data, which is not right, but the
-    original data set didn't provide test data. So I'll just be sloppy on this.
     """
-    # create multivariate model
+    # create multivariate model using training data
     mu = X.mean(axis=0)
     cov = np.cov(X.T)
     multi_normal = stats.multivariate_normal(mu, cov)
@@ -40,4 +36,25 @@ def select_threshold(X, Xval, yval):
     # find the best f-score
     argmax_fs = np.argmax(fs)
 
-    return epsilon[argmax_fs], fs[argmax_fs], (multi_normal.pdf(Xval) <= epsilon[argmax_fs]).astype('int')
+    return epsilon[argmax_fs], fs[argmax_fs]
+
+
+def predict(X, Xval, e, Xtest, ytest):
+    """with optimal epsilon, combine X, Xval and predict Xtest
+    Returns:
+        multi_normal: multivariate normal model
+        y_pred: prediction of test data
+    """
+    Xdata = np.concatenate((X, Xval), axis=0)
+
+    mu = Xdata.mean(axis=0)
+    cov = np.cov(Xdata.T)
+    multi_normal = stats.multivariate_normal(mu, cov)
+
+    # calculate probability of test data
+    pval = multi_normal.pdf(Xtest)
+    y_pred = (pval <= e).astype('int')
+
+    print(classification_report(ytest, y_pred))
+
+    return multi_normal, y_pred
