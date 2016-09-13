@@ -42,7 +42,7 @@ def plot_an_image(image):
 def plot_100_image(X):
     """ sample 100 image and show them
     assume the image is square
-    
+
     X : (5000, 400)
     """
     size = int(np.sqrt(X.shape[1]))
