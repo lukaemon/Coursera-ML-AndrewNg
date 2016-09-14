@@ -34,11 +34,11 @@ def cost(param, Y, R, n_features):
     return np.power(inner, 2).sum() / 2
 
 
-def gradient(params, Y, R, n_features):
+def gradient(param, Y, R, n_features):
     # theta (user, feature), (943, 10): user preference
     # X (movie, feature), (1682, 10): movie features
     n_movies, n_user = Y.shape
-    X, theta = deserialize(params, n_movies, n_user, n_features)
+    X, theta = deserialize(param, n_movies, n_user, n_features)
 
     inner = np.multiply(X @ theta.T - Y, R)  # (1682, 943)
 
@@ -50,3 +50,9 @@ def gradient(params, Y, R, n_features):
 
     # roll them together and return
     return serialize(X_grad, theta_grad)
+
+
+def regularized_cost(param, Y, R, n_features, l=1):
+    reg_term = np.power(param, 2).sum() * (l / 2)
+
+    return cost(param, Y, R, n_features) + reg_term
