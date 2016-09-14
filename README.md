@@ -8,9 +8,9 @@ The reason I choose python over matlab is purely practical concern. This cs224d 
 
 All these learning about theories and coding are preparation of real world application. Although the learning itself is it's own reward, I also want to create useful application that solves real world problems and create values to the community. This project is the very tiny step toward the goal. I learned so much.  
 
-The more I learn, the more I respect all those great scientific adventures before me that paves the way I have right now. Andrew's class is very good overview of general ML. More hands on approach that encourages new people keep moving, even some details is purposefully ignored. I found it very useful to pick up more theories while I'm doing these exercises. This book [Learning from Data](http://amlbook.com/) gives me so many aha moment about learning theories. This is my feeble foundation of ML theories.
+The more I learn, the more I respect all those great scientific adventures before me that paves the way I have right now. Andrew's class is very good overview of general ML. It's hands on approach  encourages new people like me keep moving, even some details are purposefully ignored. On the other hand, I found it very useful to pick up theories while doing these exercises. This book [Learning from Data](http://amlbook.com/) gives me so many aha moment about learning theories. This is my feeble foundation of ML theories.
 
-Andrew's class shows me mostly **what** to do, and **how** to do it. The book shows me **why**. Theory and practice goes hand in hand. I couldn't express how happy I am when I read something in the book and suddenly understand the reason about what I was coding last night. Eureka!
+Generally, Andrew's class shows me mostly **what** to do, and **how** to do it. The book shows me **why**. Theory and practice goes hand in hand. I couldn't express how happy I am when I read something in the book and suddenly understand the reason about what I was coding last night. Eureka!
 
 ## Project structure
 * Each exercise has it's own folder. In each folder you will find:
