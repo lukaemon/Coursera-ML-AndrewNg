@@ -16,7 +16,7 @@ def combine_data_C(data, C):
     return data_with_c
 
 
-# k-means fu --------------------------------
+# k-means fn --------------------------------
 def random_init(data, k):
     """choose k sample from data set as init centroids
     Args:

@@ -1,6 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# X (ndarray)
+# [[ 3.38156267  3.38911268]
+#  [ 4.52787538  5.8541781 ]
+#  [ 2.65568187  4.41199472]]
+
 
 # support functions ---------------------------------------
 def plot_n_image(X, n):
@@ -37,6 +42,9 @@ def covariance_matrix(X):
 
 
 def normalize(X):
+    """
+        for each column, X-mean / std
+    """
     X_copy = X.copy()
     m, n = X_copy.shape
 

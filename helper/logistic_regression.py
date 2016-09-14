@@ -121,7 +121,7 @@ def draw_boundary(power, l):
     x, y = find_decision_boundary(density, power, final_theta, threshhold)
 
     df = pd.read_csv('ex2data2.txt', names=['test1', 'test2', 'accepted'])
-    sns.lmplot('test1', 'test2', hue='accepted', data=df, size=8, fit_reg=False, scatter_kws={"s": 100})
+    sns.lmplot('test1', 'test2', hue='accepted', data=df, size=6, fit_reg=False, scatter_kws={"s": 100})
 
     plt.scatter(x, y, c='R', s=10)
     plt.title('Decision boundary')

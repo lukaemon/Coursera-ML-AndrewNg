@@ -4,6 +4,7 @@ import numpy as np
 import scipy.io as sio
 import helper.logistic_regression as lr
 import scipy.optimize as opt
+from sklearn.metrics import classification_report
 
 
 # supportive function starts here ---------------------------
@@ -145,7 +146,7 @@ def show_accuracy(theta, X, y):
 
     y_pred = np.argmax(h, axis=1) + 1
 
-    return np.mean(y == y_pred)
+    print(classification_report(y, y_pred))
 
 
 def plot_hidden_layer(theta):
