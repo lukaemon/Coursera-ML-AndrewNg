@@ -13,10 +13,22 @@ The more I learn, the more I respect all those great scientific adventures befor
 Andrew's class shows me mostly **what** to do, and **how** to do it. The book shows me **why**. Theory and practice goes hand in hand. I couldn't express how happy I am when I read something in the book and suddenly understand the reason about what I was coding last night. Eureka!
 
 ***
-### Project structure
+## Project structure
 * Each exercise has it's own folder. In each folder you will find:
   1. pdf that guide you through the project
   2. a series of Jupyter notebook
   3. data
 * each notebook basically follows the logic flow of project pdf. I didn't present all codes in notebook because I personally think it's very messy. So you will only see visualization, project logic flows, simple experiments, equations and results in notebooks.
-* In [helper]() folder, it has modules of different topics. This is where you can find details of model implementation, learning algorithm, and supporting functions.
+* In [helper](https://github.com/icrtiou/coursera-ML/tree/master/helper) folder, it has modules of different topics. This is where you can find details of model implementation, learning algorithm, and supporting functions.
+
+***
+You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
+### ex1-linear regression
+Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. [code.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
+### ex2-logistic regression
+### ex3-neural network
+### ex4-NN back propagation
+### ex5-bias vs variance
+### ex6-SVM
+### ex7-kmeans and PCA
+### ex8-anomaly detection and recommendation
