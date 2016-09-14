@@ -21,8 +21,7 @@ Andrew's class shows me mostly **what** to do, and **how** to do it. The book sh
 * each notebook basically follows the logic flow of project pdf. I didn't present all codes in notebook because I personally think it's very messy. So you will only see visualization, project logic flows, simple experiments, equations and results in notebooks.
 * In [helper](https://github.com/icrtiou/coursera-ML/tree/master/helper) folder, it has modules of different topics. This is where you can find details of model implementation, learning algorithm, and supporting functions.
 
-***
-You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
+# You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
 ### ex1-linear regression
 Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. [code.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
 ### ex2-logistic regression
