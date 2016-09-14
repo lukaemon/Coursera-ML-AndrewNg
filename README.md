@@ -12,7 +12,6 @@ The more I learn, the more I respect all those great scientific adventures befor
 
 Andrew's class shows me mostly **what** to do, and **how** to do it. The book shows me **why**. Theory and practice goes hand in hand. I couldn't express how happy I am when I read something in the book and suddenly understand the reason about what I was coding last night. Eureka!
 
-***
 ## Project structure
 * Each exercise has it's own folder. In each folder you will find:
   1. pdf that guide you through the project
