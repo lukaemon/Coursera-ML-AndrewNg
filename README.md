@@ -22,7 +22,7 @@ Andrew's class shows me mostly **what** to do, and **how** to do it. The book sh
 
 # You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
 ### ex1-linear regression
-Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. [code.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
+Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. code: [linear_regression.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
 ### ex2-logistic regression
 ### ex3-neural network
 ### ex4-NN back propagation
