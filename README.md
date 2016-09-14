@@ -24,12 +24,12 @@ Generally, Andrew's class shows me mostly **what** to do, and **how** to do it. 
 
 > acknowledgement: Thank you [John Wittenauer](https://github.com/jdwittenauer?tab=overview&from=2016-08-01&to=2016-08-31&utf8=%E2%9C%93)! I shamelessly steal lots of your code and idea. [here](https://github.com/jdwittenauer/ipython-notebooks)  
 
-### ex1-linear regression
+### [ex1-linear regression](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex1-linear%20regression/)
 Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. code: [linear_regression.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
-### ex2-logistic regression
-### ex3-neural network
-### ex4-NN back propagation
-### ex5-bias vs variance
-### ex6-SVM
-### ex7-kmeans and PCA
-### ex8-anomaly detection and recommendation
+### [ex2-logistic regression](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex2-logistic%20regression/)
+### [ex3-neural network](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex3-neural%20network/)
+### [ex4-NN back propagation](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex4-NN%20back%20propagation/)
+### [ex5-bias vs variance](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex5-bias%20vs%20variance/)
+### [ex6-SVM](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex6-SVM/)
+### [ex7-kmeans and PCA](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex7-kmeans%20and%20PCA/)
+### [ex8-anomaly detection and recommendation](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex8-anomaly%20detection%20and%20recommendation/)
