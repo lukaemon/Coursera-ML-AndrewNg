@@ -56,3 +56,10 @@ def regularized_cost(param, Y, R, n_features, l=1):
     reg_term = np.power(param, 2).sum() * (l / 2)
 
     return cost(param, Y, R, n_features) + reg_term
+
+
+def regularized_gradient(param, Y, R, n_features, l=1):
+    grad = gradient(param, Y, R, n_features)
+    reg_term = l * param
+
+    return grad + reg_term
