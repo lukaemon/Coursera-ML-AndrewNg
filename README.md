@@ -22,7 +22,9 @@ Generally, Andrew's class shows me mostly **what** to do, and **how** to do it. 
 
 # You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
 
-> acknowledgement: Thank you [John Wittenauer](https://github.com/jdwittenauer?tab=overview&from=2016-08-01&to=2016-08-31&utf8=%E2%9C%93)! I shamelessly steal lots of your code and idea. [here](https://github.com/jdwittenauer/ipython-notebooks)  
+> * acknowledgement: Thank you [John Wittenauer](https://github.com/jdwittenauer?tab=overview&from=2016-08-01&to=2016-08-31&utf8=%E2%9C%93)! I shamelessly steal lots of your code and idea. [here](https://github.com/jdwittenauer/ipython-notebooks)    
+> * if you want to run notebooks locally, you could refer to requirement.txt for libraries I've been using.  
+> tensorflow is a little bit tricky to install. you could find the instructions [here](https://www.tensorflow.org/versions/r0.10/get_started/os_setup.html).  
 
 ### [ex1-linear regression](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex1-linear%20regression/)
 Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. code: [linear_regression.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
