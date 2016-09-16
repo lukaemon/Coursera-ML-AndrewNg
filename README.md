@@ -22,7 +22,7 @@ Generally, Andrew's class shows me mostly **what** to do, and **how** to do it. 
 
 ## Go solo with python or go with built-in Matlab project?
 The Matlab project is guiding students to finish the overall project goal, be it implementing logistic regression, or backprop NN. It includes many supporting function to help you do `visualization`,  `gradient checking`, and so on.  
-The way I do it is to focus on pdf that tells you what is this project about, then figure out how to achieve those objectives using `Scipy` stack. Most of time I don't even bother looking into original `.mat` files.  
+The way I do it is to focus on pdf that tells you what is this project about, then figure out how to achieve those objectives using `Scipy` stack. Most of time I don't even bother looking into original `.m` files. Just need their data. 
 
 Without those supports, I have to do:
 
