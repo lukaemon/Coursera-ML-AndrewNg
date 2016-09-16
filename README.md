@@ -20,6 +20,19 @@ Generally, Andrew's class shows me mostly **what** to do, and **how** to do it. 
 * each notebook basically follows the logic flow of project pdf. I didn't present all codes in notebook because I personally think it's very messy. So you will only see visualization, project logic flows, simple experiments, equations and results in notebooks.
 * In [helper](https://github.com/icrtiou/coursera-ML/tree/master/helper) folder, it has modules of different topics. This is where you can find details of model implementation, learning algorithm, and supporting functions.
 
+## Go solo with python or go with built-in Matlab project?
+The Matlab project is guiding students to finish the overall project goal, be it implementing logistic regression, or backprop NN. It includes many supporting function to help you do `visualization`,  `gradient checking`, and so on.  
+The way I do it is to focus on pdf that tells you what is this project about, then figure out how to achieve those objectives using `Scipy` stack. Most of time I don't even bother looking into original `.mat` files.  
+
+Without those supports, I have to do:
+
+1. **visualization** : `seaborn`, `matplotlib` are very handy  
+2. **vetorized implementation** of ML model and gradient function use `numpy`'s power to manupulate `ndarray`  
+3. **optimization** : figure out how to use `scipy` optimizer to fit you parameters  
+4. **support functions** : nobody is loading, parsing, normalize data for you now, DIY  
+
+By doing those, I learn more, which is even better.
+
 # You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
 
 > * acknowledgement: Thank you [John Wittenauer](https://github.com/jdwittenauer?tab=overview&from=2016-08-01&to=2016-08-31&utf8=%E2%9C%93)! I shamelessly steal lots of your code and idea. [here](https://github.com/jdwittenauer/ipython-notebooks)    
