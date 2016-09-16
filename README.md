@@ -37,7 +37,7 @@ By doing those, I learn more, which is even better.
 I am learning by doing, not tools hoarding. Here is the list that helps me along the way.  
 * Intuitions of Linear Algebra, [Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab), this is the best source to my knowledge, for intuition.
 * [Python, numpy tutorial](http://cs231n.github.io/python-numpy-tutorial/)
-* More math behind the scene. [CS 229 Machine Learning Course Materials](http://cs229.stanford.edu/materials.html)
+* More math behind the scene. [CS 229 Machine Learning Course Materials](http://cs229.stanford.edu/materials.html), basically Coursera ML is water down version of this cs229. The link has very good linear algebra review ,and probability theroy review. 
 * [Quoc Le’s Lectures on Deep Learning](http://www.trivedigaurav.com/blog/quoc-les-lectures-on-deep-learning/): videos with perfect lecture notes. 
 * [Learning from Data](http://amlbook.com/): learning theory in less than 300 pages, God.
 
