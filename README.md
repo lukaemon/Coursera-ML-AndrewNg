@@ -22,7 +22,7 @@ Generally, Andrew's class shows me mostly **what** to do, and **how** to do it. 
 
 ## Go solo with python or go with built-in Matlab project?
 The Matlab project is guiding students to finish the overall project goal, be it implementing logistic regression, or backprop NN. It includes many supporting function to help you do `visualization`,  `gradient checking`, and so on.  
-The way I do it is to focus on pdf that tells you what is this project about, then figure out how to achieve those objectives using `Scipy` stack. Most of time I don't even bother looking into original `.m` files. Just need their data. 
+The way I do it is to focus on pdf that tells you what is this project about, then figure out how to achieve those objectives using `Scipy` stack. Most of time I don't even bother looking into original `.m` files. Just need their data.
 
 Without those supports, I have to do:
 
@@ -37,11 +37,12 @@ By doing those, I learn more, which is even better.
 I am learning by doing, not tools hoarding. Here is the list that helps me along the way.  
 * Intuitions of Linear Algebra, [Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab), this is the best source to my knowledge, for intuition.
 * [Python, numpy tutorial](http://cs231n.github.io/python-numpy-tutorial/)
-* More math behind the scene. [CS 229 Machine Learning Course Materials](http://cs229.stanford.edu/materials.html), basically Coursera ML is water down version of this cs229. The link has very good linear algebra review ,and probability theroy review. 
-* [Quoc Le’s Lectures on Deep Learning](http://www.trivedigaurav.com/blog/quoc-les-lectures-on-deep-learning/): videos with perfect lecture notes. 
-* [Learning from Data](http://amlbook.com/): learning theory in less than 300 pages, God.
+* More math behind the scene. [CS 229 Machine Learning Course Materials](http://cs229.stanford.edu/materials.html), basically Coursera ML is water down version of this cs229. The link has very good linear algebra review ,and probability theroy review.
+* [Quoc Le’s Lectures on Deep Learning](http://www.trivedigaurav.com/blog/quoc-les-lectures-on-deep-learning/): 4k videos with perfect lecture notes.
+* [Learning from Data](http://amlbook.com/): learning theory in less than 200 pages, God.
 
-# You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
+## You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
+**If you find bugs, wrong logic, anything that could be better, please do me a favor by creating issues. I would love to see constructively negative feedbacks**  
 
 > * acknowledgement: Thank you [John Wittenauer](https://github.com/jdwittenauer?tab=overview&from=2016-08-01&to=2016-08-31&utf8=%E2%9C%93)! I shamelessly steal lots of your code and idea. [here](https://github.com/jdwittenauer/ipython-notebooks)    
 > * if you want to run notebooks locally, you could refer to requirement.txt for libraries I've been using.  
