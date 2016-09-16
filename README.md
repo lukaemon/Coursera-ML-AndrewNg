@@ -42,7 +42,7 @@ I am learning by doing, not tools hoarding. Here is the list that helps me along
 * [Learning from Data](http://amlbook.com/): learning theory in less than 200 pages, God.
 
 ## You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
-**If you find bugs, wrong logic, anything that could be better, please do me a favor by creating issues. I would love to see constructively negative feedbacks**  
+**If you find bugs, false logic, just anything that could be better, please do me a favor by creating issues. I would love to see constructively negative feedbacks**  
 
 > * acknowledgement: Thank you [John Wittenauer](https://github.com/jdwittenauer?tab=overview&from=2016-08-01&to=2016-08-31&utf8=%E2%9C%93)! I shamelessly steal lots of your code and idea. [here](https://github.com/jdwittenauer/ipython-notebooks)    
 > * if you want to run notebooks locally, you could refer to requirement.txt for libraries I've been using.  
