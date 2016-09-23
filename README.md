@@ -41,7 +41,7 @@ I am learning by doing, not tools hoarding. Here is the list that helps me along
 * [Quoc Le’s Lectures on Deep Learning](http://www.trivedigaurav.com/blog/quoc-les-lectures-on-deep-learning/): 4k videos with perfect lecture notes.
 * [Learning from Data](http://amlbook.com/): learning theory in less than 200 pages, God.
 
-## You can read all Jupyter notebooks here: [nbviewer](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/)
+## Run locally
 **If you find bugs, false logic, just anything that could be better, please do me a favor by creating issues. I would love to see constructively negative feedbacks**  
 
 * acknowledgement: Thank you [John Wittenauer](https://github.com/jdwittenauer?tab=overview&from=2016-08-01&to=2016-08-31&utf8=%E2%9C%93)! I shamelessly steal lots of your code and idea. [here](https://github.com/jdwittenauer/ipython-notebooks)    
@@ -51,13 +51,17 @@ I am learning by doing, not tools hoarding. Here is the list that helps me along
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">tensorflow (64-bit linux only) is now available on <a href="https://t.co/292ZKEfpjQ">https://t.co/292ZKEfpjQ</a> Use conda install tensorflow to get it!</p>&mdash; Continuum Analytics (@ContinuumIO) <a href="https://twitter.com/ContinuumIO/status/777882145675096068">September 19, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>  
   
-
+## Read notebook with nbviewer, and references for each exercise
 ### [ex1-linear regression](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex1-linear%20regression/)
-Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. code: [linear_regression.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
+* Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. code: [linear_regression.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
+
 ### [ex2-logistic regression](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex2-logistic%20regression/)
 ### [ex3-neural network](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex3-neural%20network/)
 ### [ex4-NN back propagation](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex4-NN%20back%20propagation/)
 ### [ex5-bias vs variance](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex5-bias%20vs%20variance/)
 ### [ex6-SVM](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex6-SVM/)
 ### [ex7-kmeans and PCA](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex7-kmeans%20and%20PCA/)
+* [The Elements of 
+Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) pg.64 has very good explanation about **singular value decomposition**, which is used to find principle components in our PCA. The book is free to download. 
+
 ### [ex8-anomaly detection and recommendation](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex8-anomaly%20detection%20and%20recommendation/)
