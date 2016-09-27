@@ -62,6 +62,7 @@ I am learning by doing, not tools hoarding. Here is the list that helps me along
 ### [ex6-SVM](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex6-SVM/)
 ### [ex7-kmeans and PCA](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex7-kmeans%20and%20PCA/)
 * [The Elements of 
-Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) pg.64 has very good explanation about **singular value decomposition**, which is used to find principle components in our PCA. The book is free to download. 
+Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) pg.64 has very good explanation about **singular value decomposition**, which is used to find principle components in our PCA. The book is free to download.  
+* [The Deep Learning (ch2.7, 2.8)](http://www.deeplearningbook.org/) has briefly talked about `eigendecomposition` and `SVD`
 
 ### [ex8-anomaly detection and recommendation](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex8-anomaly%20detection%20and%20recommendation/)
