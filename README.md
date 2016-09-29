@@ -58,7 +58,9 @@ I am learning by doing, not tools hoarding. Here is the list that helps me along
 ### [ex2-logistic regression](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex2-logistic%20regression/)
 ### [ex3-neural network](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex3-neural%20network/)
 ### [ex4-NN back propagation](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex4-NN%20back%20propagation/)
-### [ex5-bias vs variance](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex5-bias%20vs%20variance/)
+### [ex5-bias vs variance](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex5-bias%20vs%20variance/)  
+* [Deep Learning](http://www.deeplearningbook.org/) ch5.4 has decent treatment of bias vs variance  
+
 ### [ex6-SVM](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex6-SVM/)
 ### [ex7-kmeans and PCA](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex7-kmeans%20and%20PCA/)
 * [The Elements of 
