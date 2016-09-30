@@ -50,7 +50,7 @@ I am learning by doing, not tools hoarding. Here is the list that helps me along
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">tensorflow (64-bit linux only) is now available on <a href="https://t.co/292ZKEfpjQ">https://t.co/292ZKEfpjQ</a> Use conda install tensorflow to get it!</p>&mdash; Continuum Analytics (@ContinuumIO) <a href="https://twitter.com/ContinuumIO/status/777882145675096068">September 19, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>  
-  
+
 ## Read notebook with nbviewer, and references for each exercise
 ### [ex1-linear regression](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex1-linear%20regression/)
 * Special thing I did in this project is I implement the linear regression model in [TensorFlow](https://www.tensorflow.org/). This is my first tf experience. Looking forward to learn more when I move into Deep Learning. code: [linear_regression.py](https://github.com/icrtiou/coursera-ML/blob/master/helper/linear_regression.py)
@@ -63,8 +63,8 @@ I am learning by doing, not tools hoarding. Here is the list that helps me along
 
 ### [ex6-SVM](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex6-SVM/)
 ### [ex7-kmeans and PCA](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex7-kmeans%20and%20PCA/)
-* [The Elements of 
+* [The Elements of
 Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/) pg.64 has very good explanation about **singular value decomposition**, which is used to find principle components in our PCA. The book is free to download.  
 * [The Deep Learning (ch2.7, 2.8)](http://www.deeplearningbook.org/) has briefly talked about `eigendecomposition` and `SVD`
-
+* [The Deep Learning (ch5.8.1)](http://www.deeplearningbook.org/) describes clearly the relationship between `PCA` and `SVD`
 ### [ex8-anomaly detection and recommendation](http://nbviewer.jupyter.org/github/icrtiou/coursera-ML/tree/master/ex8-anomaly%20detection%20and%20recommendation/)

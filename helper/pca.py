@@ -66,9 +66,12 @@ def pca(X):
     X_norm = normalize(X)
 
     # 2. calculate covariance matrix
-    Sigma = covariance_matrix(X_norm)
+    Sigma = covariance_matrix(X_norm)  # (n, n)
 
     # 3. do singular value decomposition
+    # remeber, we feed cov matrix in SVD, since the cov matrix is symmetry
+    # left sigular vector and right singular vector is the same, which means
+    # U is V, so we could use either one to do dim reduction
     U, S, V = np.linalg.svd(Sigma)  # U: principle components (n, n)
 
     return U, S, V
