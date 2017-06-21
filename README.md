@@ -27,7 +27,7 @@ The way I do it is to focus on pdf that tells you what is this project about, th
 Without those supports, I have to do:
 
 1. **visualization** : `seaborn`, `matplotlib` are very handy  
-2. **vetorized implementation** of ML model and gradient function use `numpy`'s power to manupulate `ndarray`  
+2. **vetorized implementation** of ML model and gradient function use `numpy`'s power to manipulate `ndarray`  
 3. **optimization** : figure out how to use `scipy` optimizer to fit you parameters  
 4. **support functions** : nobody is loading, parsing, normalize data for you now, DIY  
 
